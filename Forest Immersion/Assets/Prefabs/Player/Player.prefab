@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6370925900584144810}
   - component: {fileID: 6370925900584144807}
   - component: {fileID: 6370925900584144808}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -86,13 +86,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6370925900958333065}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: WeaponPivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6370925900958333065
 Transform:
   m_ObjectHideFlags: 0
@@ -120,7 +120,7 @@ GameObject:
   - component: {fileID: 6370925901026375899}
   - component: {fileID: 6370925901026375900}
   - component: {fileID: 6370925901026375901}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -218,7 +218,7 @@ GameObject:
   - component: {fileID: 6370925901324657151}
   - component: {fileID: 6370925901324657148}
   - component: {fileID: 6370925901324657149}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -294,7 +294,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6370925901400823642}
   - component: {fileID: 6370925901400823641}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: GunTest
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -348,7 +348,7 @@ GameObject:
   - component: {fileID: 6370925901579654289}
   - component: {fileID: 6370925901579654290}
   - component: {fileID: 6370925901579654319}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -380,12 +380,13 @@ Camera:
   m_GameObject: {fileID: 6370925901579654291}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
+  m_ClearFlags: 2
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
   m_projectionMatrixMode: 1
+  m_GateFitMode: 2
+  m_FOVAxisMode: 0
   m_SensorSize: {x: 36, y: 24}
   m_LensShift: {x: 0, y: 0}
-  m_GateFitMode: 2
   m_FocalLength: 50
   m_NormalizedViewPortRect:
     serializedVersion: 2
@@ -433,6 +434,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77d2b217aa1a5214cb574fa17917fa84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isEnabled: 0
   invertHorizontal: 0
   invertVertical: 0
   sensitivity: 10
@@ -449,7 +451,7 @@ GameObject:
   - component: {fileID: 6370925901801594834}
   - component: {fileID: 6370925901801594835}
   - component: {fileID: 6370925901801594836}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -540,7 +542,7 @@ GameObject:
   - component: {fileID: 6370925902046220500}
   - component: {fileID: 6370925902046220498}
   - component: {fileID: 6370925902046220499}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Crosshair
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -615,9 +617,9 @@ GameObject:
   - component: {fileID: 6370925902053706601}
   - component: {fileID: 6370925902053706598}
   - component: {fileID: 6370925902053706599}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -680,5 +682,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2259fcc23236a994693498c8d9ef0aa2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 2
-  gravity: 20
+  isEnabled: 1
+  moveSpeed: 0.2
+  gravity: 22
+  axesScale: {x: 0, y: 1, z: 1}

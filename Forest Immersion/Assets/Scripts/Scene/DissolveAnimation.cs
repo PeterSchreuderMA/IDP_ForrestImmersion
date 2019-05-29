@@ -8,8 +8,11 @@ public class DissolveAnimation : MonoBehaviour
 
     private Renderer[] childeren;
 
+    [SerializeField]
+    bool debugTest = false;
+
     [Range(0, 1)]
-    public float progress = 0f;
+    public float progress = 1f;
 
     static float time = 0f;
 
@@ -20,20 +23,23 @@ public class DissolveAnimation : MonoBehaviour
 
     void Update()
     {
-        //DissolveTest();
+        // If debug is false the dont run the next code
+        if (!debugTest)
+            return;
+
+
         if (Input.GetKeyUp(KeyCode.A))
         {
-            //iTween.ValueTo(gameObject, iTween.Hash());
             Dissolve(2f, 1f);
-            //DissolveIn();
         }
         else if (Input.GetKeyUp(KeyCode.D))
         {
             Dissolve(2f, 0f);
-            //DissolveOut();
         }
 
     }
+
+
 
     void DissolveSetup()
     {
@@ -42,6 +48,21 @@ public class DissolveAnimation : MonoBehaviour
         ChangeMaterialOfChilderen(materialDissolve);
         UpdateMaterialOfChilderen();
     }
+    
+
+    /// <summary>
+    /// Dissolves the object instantly
+    /// </summary>
+    /// <param name="_in">true: Dissolve In - false: Dissolve Out</param>
+    /// <returns></returns>
+    public bool DissolveInstantly(bool _in)
+    {
+        if (_in)
+            return Dissolve(0f, 0f);
+        else
+            return Dissolve(0f, 1f);
+    }
+
 
 
     public bool DissolveIn()
@@ -54,12 +75,14 @@ public class DissolveAnimation : MonoBehaviour
         return _return;
     }
 
+
+
     public bool DissolveOut()
     {
-
-
         return Dissolve(2f, 0f);
     }
+
+
 
     bool Dissolve(float _time, float _target)
     {
@@ -86,9 +109,9 @@ public class DissolveAnimation : MonoBehaviour
             var _mats = new Material[_rend.materials.Length];
 
             //Loop through all materials of the child
-            for (var j = 0; j < _rend.materials.Length; j++)
+            for (var i = 0; i < _rend.materials.Length; i++)
             {
-                _mats[j] = _newMat;
+                _mats[i] = _newMat;
             }
             _rend.materials = _mats;
         }

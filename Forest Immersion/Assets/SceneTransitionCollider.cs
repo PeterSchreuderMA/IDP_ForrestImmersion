@@ -30,7 +30,7 @@ namespace SceneTransition
 
         void OnTriggerEnter(Collider _col)
         {
-            if (_col.gameObject.layer == detectionLayer && _col.CompareTag("Player"))
+            if (_col.CompareTag("Player"))//_col.gameObject.layer == detectionLayer && 
             {
                 collidedWPlayer = true;
             }
