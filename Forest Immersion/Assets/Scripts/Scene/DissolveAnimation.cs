@@ -16,6 +16,8 @@ public class DissolveAnimation : MonoBehaviour
 
     static float time = 0f;
 
+    private float transMinVal = 0.5f, transMaxVal = 1f;
+
     void Start()
     {
         DissolveSetup();
@@ -58,9 +60,9 @@ public class DissolveAnimation : MonoBehaviour
     public bool DissolveInstantly(bool _in)
     {
         if (_in)
-            return Dissolve(0f, 0f);
+            return Dissolve(transMaxVal, transMinVal);
         else
-            return Dissolve(0f, 1f);
+            return Dissolve(transMinVal, transMaxVal);
     }
 
 
@@ -69,7 +71,7 @@ public class DissolveAnimation : MonoBehaviour
     {
         bool _return = false;
 
-        _return = Dissolve(2f, 1f);
+        _return = Dissolve(2f, transMaxVal);
 
 
         return _return;
@@ -79,7 +81,7 @@ public class DissolveAnimation : MonoBehaviour
 
     public bool DissolveOut()
     {
-        return Dissolve(2f, 0f);
+        return Dissolve(2f, transMinVal);
     }
 
 

@@ -25,6 +25,8 @@ namespace SceneTransition
         PlayerMovement playerMovement;
         GameObject playerObject;
 
+        private float playerVelMax = 2f;
+
         List<GameObject> STCObjects = new List<GameObject>();
 
         // Start is called before the first frame update
@@ -45,6 +47,7 @@ namespace SceneTransition
         // Update is called once per frame
         void Update()
         {
+            print(playerMovement.gameObject.GetComponent<Rigidbody>().velocity.z);
             STCCheck();
         }
 
@@ -113,11 +116,16 @@ namespace SceneTransition
 
 
             // Slow down the player
-            playerMovement.moveSpeed = Mathf.Lerp(_mSpeed, _mSpeed / 2f, _transSpeed);
+            iTween.ValueTo(gameObject, iTween.Hash("from", _mSpeed, "to", _mSpeed / 2f, "time", _transSpeed, "onupdate", "TweenProgress"));
 
-            // Slow it down by velocity to or else player player will move the same speed
+            // - Setup -
+            playerMovement.isEnabled = false;
+
+            //playerMovement.moveSpeed = Mathf.Lerp(_mSpeed, _mSpeed / 2f, _transSpeed);
+
+            // Slow the player down by velocity to or else the player will be moving at the same speed
             _velZ = playerMovement.gameObject.GetComponent<Rigidbody>().velocity.z;
-            playerObject.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, _velZ / 2);
+            playerObject.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, playerVelMax / 2);
 
 
             // Dissolve the current scene
@@ -126,9 +134,18 @@ namespace SceneTransition
             sceneCurrent++;
 
 
-            // Spawn the player to the start if it reaches the end (This will be changed to that the scenes will change position in the world)
+            //Werkt nog niet
             if (sceneCurrent == scenes.Length)
-                playerObject.transform.position = new Vector3(0, 0, 0);
+            {
+                int _prevSceneInt = (sceneCurrent - 1) % scenes.Length;
+                int _endSceneInt = (sceneCurrent + scenes.Length) % scenes.Length;
+
+                scenes[_prevSceneInt].transform.position = scenes[_endSceneInt].GetComponent<SceneObject>().sceneEndPosition.position;
+
+                // Spawn the player back to the start if it reaches the end (This will be changed to that the scenes will change position in the world)
+                //playerObject.transform.position = new Vector3(0f, 0f, 0f);
+            }
+                
 
 
             // Loop the sceneCurrent variable
@@ -141,7 +158,10 @@ namespace SceneTransition
             yield return new WaitForSeconds(2f);
 
             // Set the player's movement speed back to normal
-            playerMovement.moveSpeed = Mathf.Lerp(playerMovement.moveSpeed, _mSpeed, _transSpeed);
+            iTween.ValueTo(gameObject, iTween.Hash("from", playerMovement.moveSpeed, "to", _mSpeed, "time", _transSpeed, "onupdate", "TweenProgress"));
+
+            playerMovement.isEnabled = true;
+            //playerMovement.moveSpeed = Mathf.Lerp(playerMovement.moveSpeed, _mSpeed, _transSpeed);
 
 
         }
