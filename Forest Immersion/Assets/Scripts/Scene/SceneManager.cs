@@ -107,6 +107,8 @@ namespace SceneTransition
 
         public IEnumerator SceneTransition()
         {
+            print("Starting transition");
+
             float _velZ;
 
             float _mSpeed = playerMovement.moveSpeed;// Save the current movement speed
@@ -156,15 +158,16 @@ namespace SceneTransition
             iTween.ValueTo(gameObject, iTween.Hash("from", playerMovement.moveSpeed, "to", _mSpeed, "time", _transSpeed, "onupdate", "TweenProgress"));
 
             playerMovement.isEnabled = true;
-            print("");
+            
             print("prev: " + _prevSceneInt);
             print("end: " + _endSceneInt);
 
+            yield return new WaitForSeconds(2f);
 
             scenes[_prevSceneInt].transform.position = scenes[_endSceneInt].GetComponent<SceneObject>().sceneEndPosition.position;
             //playerMovement.moveSpeed = Mathf.Lerp(playerMovement.moveSpeed, _mSpeed, _transSpeed);
 
-
+            yield return false;
         }
     }
 
