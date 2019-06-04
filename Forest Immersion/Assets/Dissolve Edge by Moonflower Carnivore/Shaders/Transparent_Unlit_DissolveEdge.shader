@@ -8,6 +8,7 @@
 		_MainTex("Main Texture", 2D) = "white" {}
 		_DissolveTex("Dissolve Texture", 2D) = "white" {}
 		_Edge("Edge",Range(0.01,0.5)) = 0.01
+		_LightColor1("Color of the lighting", Color) = (1,1,1,1)
 
 		[Header(Edge Color)]
 		[Toggle(EDGE_COLOR)] _UseEdgeColor("Edge Color?", Float) = 1
@@ -25,6 +26,7 @@
 		{
 			Blend SrcAlpha OneMinusSrcAlpha //Alpha Blend
 			Cull[_CullMode] Lighting Off ZWrite[_ZWrite]
+			Tags {"LightMode" = "ForwardBase"}
 
 			CGPROGRAM
 			#pragma vertex vert
@@ -32,12 +34,14 @@
 			#pragma shader_feature EDGE_COLOR
 
 			#include "UnityCG.cginc"
+			//#include "UnityLightingCommon.cginc" // for _LightColor0
 
 			struct appdata
 			{
 				float4 vertex : POSITION;
 				float2 uv : TEXCOORD0;
 				fixed4 color : COLOR;
+				fixed3 normal : NORMAL;
 			};
 
 			struct v2f
@@ -46,12 +50,14 @@
 				float2 uv3 : TEXCOORD3;
 				float4 vertex : SV_POSITION;
 				fixed4 color : COLOR;
+				fixed4 diff : COLOR1; // diffuse lighting color
 			};
 
 			sampler2D _MainTex;
 			sampler2D _DissolveTex;
 			float4 _MainTex_ST;
 			float4 _DissolveTex_ST;
+			float4 _LightColor1;
 			fixed _Edge;
 			fixed _Progress;
 
@@ -72,6 +78,15 @@
 				o.uv3 = TRANSFORM_TEX(v.uv, _DissolveTex);
 				o.color = v.color;
 				o.color.a *= _Progress;
+
+				// get vertex normal in world space
+				half3 worldNormal = UnityObjectToWorldNormal(v.normal);
+				// dot product between normal and light direction for
+				// standard diffuse (Lambert) lighting
+				half nl = max(0, dot(worldNormal, _WorldSpaceLightPos0.xyz));
+				// factor in the light color
+				o.diff = nl * _LightColor1; //LightColor1
+
 				return o;
 			}
 			
@@ -80,6 +95,7 @@
 					fixed4 col = tex2D(_DissolveTex, i.uv3);
 					fixed x = col.r;
 					fixed progress = i.color.a;
+					i.diff.a = 1;
 	
 					//Edge
 					fixed edge = lerp( x + _Edge, x - _Edge, progress);
@@ -107,6 +123,7 @@
 						col.rgb *= i.color.rgb;
 					#endif
 
+					col *= i.diff;
 					col.a *= alpha;
 					
 

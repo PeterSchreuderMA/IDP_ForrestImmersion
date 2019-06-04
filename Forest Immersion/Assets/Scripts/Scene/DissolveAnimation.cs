@@ -16,7 +16,7 @@ public class DissolveAnimation : MonoBehaviour
 
     static float time = 0f;
 
-    private float transMinVal = 0.5f, transMaxVal = 1f;
+    public float transMinVal = 0f, transMaxVal = 1f;
 
     void Start()
     {
