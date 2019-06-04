@@ -25,7 +25,7 @@ namespace SceneTransition
         PlayerMovement playerMovement;
         GameObject playerObject;
 
-        private float playerVelMax = 2f;
+        private float playerVelMax = -2.4f;
 
         List<GameObject> STCObjects = new List<GameObject>();
 
@@ -47,7 +47,7 @@ namespace SceneTransition
         // Update is called once per frame
         void Update()
         {
-            //print(playerMovement.gameObject.GetComponent<Rigidbody>().velocity.z);
+            print(playerMovement.gameObject.GetComponent<Rigidbody>().velocity.x);
             STCCheck();
         }
 
@@ -118,7 +118,7 @@ namespace SceneTransition
 
 
             // Slow down the player
-            iTween.ValueTo(gameObject, iTween.Hash("from", _mSpeed, "to", _mSpeed / 2f, "time", _transSpeed, "onupdate", "TweenProgress"));
+            iTween.ValueTo(gameObject, iTween.Hash("from", playerMovement.moveSpeed, "to", _mSpeed / 2f, "time", _transSpeed, "onupdate", "TweenProgress"));
 
             // - Setup -
             playerMovement.isEnabled = false;
@@ -140,7 +140,7 @@ namespace SceneTransition
             print("Scene lenth:" + scenes.Length);
 
             //int _prevSceneInt = (sceneCurrent - 1) % scenes.Length;
-            int _endSceneInt = (sceneCurrent + (scenes.Length + 1)) % scenes.Length;
+            int _endSceneInt = (sceneCurrent + (scenes.Length - 2)) % scenes.Length;
 
 
             sceneCurrent %= scenes.Length;
@@ -158,7 +158,9 @@ namespace SceneTransition
             iTween.ValueTo(gameObject, iTween.Hash("from", playerMovement.moveSpeed, "to", _mSpeed, "time", _transSpeed, "onupdate", "TweenProgress"));
 
             playerMovement.isEnabled = true;
-            
+
+            print("------------------");
+            print("current: " + sceneCurrent);
             print("prev: " + _prevSceneInt);
             print("end: " + _endSceneInt);
 

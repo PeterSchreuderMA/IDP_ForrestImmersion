@@ -10,6 +10,8 @@ public class DissolveAnimation : MonoBehaviour
 
     private Renderer[] childeren;
 
+    private List<Material> childerenStandardMaterial = new List<Material>();
+
     [SerializeField]
     bool debugTest = false;
 
@@ -121,12 +123,39 @@ public class DissolveAnimation : MonoBehaviour
             //Loop through all materials of the child
             for (var i = 0; i < _rend.materials.Length; i++)
             {
-                Texture _oldTex = _mats[i].mainTexture;
+                Texture _oldTex = _rend.materials[i].GetTexture("_MainTex");
+                print("_oldTex: " + _oldTex);
+
+                childerenStandardMaterial.Add(_mats[i]);
 
                 _mats[i] = _newMat;
-                _mats[i].mainTexture = _oldTex;
+                _mats[i].SetTexture("_MainTex", _oldTex);
+
+                //_rend.materials[i] = _mats[i];
             }
+            childerenStandardMaterial.Add(_mats[0]);
             _rend.materials = _mats;
+
+        }
+    }
+
+    void RevertMaterialOfChilderen()
+    {
+        if (!isEnabled)
+            return;
+
+        childeren = GetComponentsInChildren<Renderer>();
+
+        //Change all the childeren their materials
+        foreach (Renderer _rend in childeren)
+        {
+            //var _mats = new Material[_rend.materials.Length];
+
+            //Loop through all materials of the child
+            for (var i = 0; i < _rend.materials.Length; i++)
+            {
+                _rend.materials[i] = childerenStandardMaterial[i];
+            }
         }
     }
 
