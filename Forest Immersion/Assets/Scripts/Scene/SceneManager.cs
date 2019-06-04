@@ -47,7 +47,7 @@ namespace SceneTransition
         // Update is called once per frame
         void Update()
         {
-            print(playerMovement.gameObject.GetComponent<Rigidbody>().velocity.z);
+            //print(playerMovement.gameObject.GetComponent<Rigidbody>().velocity.z);
             STCCheck();
         }
 
@@ -131,25 +131,19 @@ namespace SceneTransition
             // Dissolve the current scene
             scenes[sceneCurrent].GetComponent<DissolveAnimation>().DissolveOut();
 
+            int _prevSceneInt = sceneCurrent; 
+
             sceneCurrent++;
 
+            print("Scene lenth:" + scenes.Length);
 
-            //Werkt nog niet
-            if (sceneCurrent == scenes.Length)
-            {
-                int _prevSceneInt = (sceneCurrent - 1) % scenes.Length;
-                int _endSceneInt = (sceneCurrent + scenes.Length) % scenes.Length;
-
-                scenes[_prevSceneInt].transform.position = scenes[_endSceneInt].GetComponent<SceneObject>().sceneEndPosition.position;
-
-                // Spawn the player back to the start if it reaches the end (This will be changed to that the scenes will change position in the world)
-                //playerObject.transform.position = new Vector3(0f, 0f, 0f);
-            }
+            //int _prevSceneInt = (sceneCurrent - 1) % scenes.Length;
+            int _endSceneInt = (sceneCurrent + (scenes.Length + 1)) % scenes.Length;
                 
 
 
             // Loop the sceneCurrent variable
-            sceneCurrent = sceneCurrent % scenes.Length;
+            //sceneCurrent = sceneCurrent % scenes.Length;
 
             // Dissolve back the current scene
             scenes[sceneCurrent].GetComponent<DissolveAnimation>().DissolveIn();
@@ -161,6 +155,8 @@ namespace SceneTransition
             iTween.ValueTo(gameObject, iTween.Hash("from", playerMovement.moveSpeed, "to", _mSpeed, "time", _transSpeed, "onupdate", "TweenProgress"));
 
             playerMovement.isEnabled = true;
+
+            scenes[_prevSceneInt].transform.position = scenes[_endSceneInt].GetComponent<SceneObject>().sceneEndPosition.position;
             //playerMovement.moveSpeed = Mathf.Lerp(playerMovement.moveSpeed, _mSpeed, _transSpeed);
 
 
