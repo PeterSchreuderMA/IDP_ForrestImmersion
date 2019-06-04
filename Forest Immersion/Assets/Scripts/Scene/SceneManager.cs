@@ -139,8 +139,9 @@ namespace SceneTransition
 
             //int _prevSceneInt = (sceneCurrent - 1) % scenes.Length;
             int _endSceneInt = (sceneCurrent + (scenes.Length + 1)) % scenes.Length;
-                
 
+
+            sceneCurrent %= scenes.Length;
 
             // Loop the sceneCurrent variable
             //sceneCurrent = sceneCurrent % scenes.Length;
@@ -155,6 +156,10 @@ namespace SceneTransition
             iTween.ValueTo(gameObject, iTween.Hash("from", playerMovement.moveSpeed, "to", _mSpeed, "time", _transSpeed, "onupdate", "TweenProgress"));
 
             playerMovement.isEnabled = true;
+            print("");
+            print("prev: " + _prevSceneInt);
+            print("end: " + _endSceneInt);
+
 
             scenes[_prevSceneInt].transform.position = scenes[_endSceneInt].GetComponent<SceneObject>().sceneEndPosition.position;
             //playerMovement.moveSpeed = Mathf.Lerp(playerMovement.moveSpeed, _mSpeed, _transSpeed);
