@@ -5,7 +5,7 @@
 		[Enum(Off,0,Front,1,Back,2)] _CullMode ("Culling Mode", int) = 0
 		[Enum(Off,0,On,1)] _ZWrite("ZWrite", int) = 0
 		_Progress("Progress",Range(0,1)) = 0
-		_MainTex("Main Texture", 2D) = "white" {}
+		[PerRendererData]_MainTex("Main Texture", 2D) = "white" {}
 		_DissolveTex("Dissolve Texture", 2D) = "white" {}
 		_Edge("Edge",Range(0.01,0.5)) = 0.01
 		_LightColor1("Color of the lighting", Color) = (1,1,1,1)
