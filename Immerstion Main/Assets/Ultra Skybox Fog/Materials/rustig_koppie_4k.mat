@@ -31,10 +31,10 @@ Material:
     - <noninit>: 0
     - _Exposure: 1
     - _FogBottom: 1
-    - _FogEnd: 0.14
+    - _FogEnd: 0.408
     - _FogIntens: 1
     - _FogStart: 0.029
-    - _MieIntens: 1.114
+    - _MieIntens: 0
     - _MieSize: 0.455
     - _Rotation: 0
     - _SunDir: 0

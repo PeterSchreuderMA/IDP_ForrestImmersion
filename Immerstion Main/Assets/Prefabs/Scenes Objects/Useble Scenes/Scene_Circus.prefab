@@ -11397,7 +11397,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d2085def5c83534d9a9e6c46ba7d5d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isEnabled: 1
+  isEnabled: 0
   materialDissolve: {fileID: 2100000, guid: 5a0e9086bd6bbf245bd506367fc008db, type: 2}
   childerenStandardMaterial: []
   debugTest: 0

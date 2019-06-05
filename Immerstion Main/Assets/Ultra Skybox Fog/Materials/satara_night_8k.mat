@@ -29,15 +29,15 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - <noninit>: 0
-    - _Exposure: 0.9
-    - _FogBottom: 0
-    - _FogEnd: 0.477
-    - _FogIntens: 1
-    - _FogStart: 0
-    - _MieIntens: 1.439
-    - _MieSize: 0.245
-    - _Rotation: 42
-    - _SunDir: 244
+    - _Exposure: 3.21
+    - _FogBottom: 1
+    - _FogEnd: 0.682
+    - _FogIntens: 0.992
+    - _FogStart: 0.616
+    - _MieIntens: 0.71
+    - _MieSize: 0.123
+    - _Rotation: 275
+    - _SunDir: 360
     m_Colors:
     - <noninit>: {r: 0, g: 2.0182498, b: 1e-45, a: 1.2904559e-15}
     - _FogCol: {r: 0.2264151, g: 0.2264151, b: 0.2264151, a: 0.5}

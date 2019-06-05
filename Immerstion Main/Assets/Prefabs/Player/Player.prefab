@@ -126,7 +126,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &6370925901026375902
 RectTransform:
   m_ObjectHideFlags: 0
@@ -224,7 +224,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6370925901324657151
 Transform:
   m_ObjectHideFlags: 0
@@ -348,6 +348,7 @@ GameObject:
   - component: {fileID: 6370925901579654289}
   - component: {fileID: 6370925901579654290}
   - component: {fileID: 6370925901579654319}
+  - component: {fileID: 712839900}
   m_Layer: 8
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -363,7 +364,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6370925901579654291}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.8, z: 0}
+  m_LocalPosition: {x: 0, y: 0.9, z: 0.066}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 6370925900958333065}
@@ -380,8 +381,8 @@ Camera:
   m_GameObject: {fileID: 6370925901579654291}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_ClearFlags: 1
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -396,7 +397,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 80
+  field of view: 60
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -439,6 +440,19 @@ MonoBehaviour:
   invertVertical: 0
   sensitivity: 10
   maxYAngle: 80
+--- !u!114 &712839900
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6370925901579654291}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff26db721962cdf4a8edcdfa9a767d2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  profile: {fileID: 11400000, guid: a9cb4a6b80c670b47a053671bc2bcc7f, type: 2}
 --- !u!1 &6370925901801594838
 GameObject:
   m_ObjectHideFlags: 0
@@ -665,7 +679,7 @@ Rigidbody:
   m_Mass: 1
   m_Drag: 2
   m_AngularDrag: 0.05
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 112
@@ -683,7 +697,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isEnabled: 1
-  moveSpeed: 0.2
+  moveSpeed: 0.1
   gravity: 22
-  axesScale: {x: 0, y: 1, z: 1}
+  axesScale: {x: 1, y: 1, z: 0}
   rigidbodyPlayer: {fileID: 0}
